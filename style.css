@@ -71,3 +71,5 @@ body.unified-workspace{height:100dvh;overflow:hidden}.unified-workspace>header{p
 }
 
 @media(max-width:760px){.compact-workspace.unified-workspace header .project{margin-left:0!important;justify-self:start;width:43%}.compact-workspace.unified-workspace #projectPicker{width:100%!important;max-width:100%;min-width:0}.unified-workspace .unified-sidebar-heading h2{display:block;font-size:18px}.unified-workspace .unified-sidebar-heading .eyebrow{margin:0 0 10px}}
+
+@media(min-width:761px) and (max-width:1100px){.compact-workspace.unified-workspace header{gap:10px;padding-left:14px;padding-right:14px}.environment-badge{display:none}.compact-workspace.unified-workspace header .steps{min-width:0;overflow-x:auto;scrollbar-width:none;flex:1;gap:0}.compact-workspace.unified-workspace header .steps button{padding:0 9px;font-size:11px;white-space:nowrap;flex-shrink:0}.compact-workspace.unified-workspace header .project input{display:none}.compact-workspace.unified-workspace #projectPicker{width:115px!important}.compact-workspace.unified-workspace .top-actions{gap:5px}.compact-workspace.unified-workspace .top-actions button{font-size:10px;padding:8px 7px}}
