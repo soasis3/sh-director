@@ -6,7 +6,26 @@ if (window.SHWeb) {
   const networkFetch = window.fetch.bind(window);
   const database = new Promise((resolve,reject)=>{const req=indexedDB.open('sh-director-web',1);req.onupgradeneeded=()=>{req.result.createObjectStore('projects',{keyPath:'projectId'});req.result.createObjectStore('media',{keyPath:'key'});req.result.createObjectStore('trash',{keyPath:'projectId'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
   async function db(store,method,value){const connection=await database;return new Promise((resolve,reject)=>{const tx=connection.transaction(store,method==='getAll'?'readonly':'readwrite'),req=tx.objectStore(store)[method](...(value===undefined?[]:[value]));let result;req.onsuccess=()=>result=req.result;tx.oncomplete=()=>resolve(result);tx.onerror=()=>reject(tx.error);});}
-  window.SHWebReady=db('media','getAll').then(rows=>{for(const row of rows)SHMediaURLs.set(row.key,row.remoteURL||URL.createObjectURL(row.blob));});
+  window.SHWebReady=(async()=>{
+    const rows=await db('media','getAll');
+    for(const row of rows)SHMediaURLs.set(row.key,row.remoteURL||URL.createObjectURL(row.blob));
+    try{
+      const manifestResponse=await networkFetch('published-projects/index.json',{cache:'no-store',signal:AbortSignal.timeout(10000)});
+      if(!manifestResponse.ok)return;
+      const manifest=await manifestResponse.json(),existing=await db('projects','getAll'),deleted=new Set((await db('trash','getAll')).map(p=>p.projectId));
+      for(const entry of manifest.projects||[]){
+        const response=await networkFetch(entry.file+'?revision='+encodeURIComponent(entry.revision),{cache:'no-store',signal:AbortSignal.timeout(10000)});
+        if(!response.ok)continue;
+        const published=await response.json();
+        for(const media of published.media||[]){
+          const key=entry.id+'/'+media.path,remoteURL=new URL(media.url,document.baseURI).href;
+          if(!SHMediaURLs.has(key)){SHMediaURLs.set(key,remoteURL);await db('media','put',{...media,key,projectId:entry.id,remoteURL,createdAt:new Date().toISOString(),source:'published'});}
+        }
+        // Seed once; never overwrite edits made in this browser or restore a deleted project.
+        if(!existing.some(p=>p.projectId===entry.id)&&!deleted.has(entry.id))await db('projects','put',{...published.project,publishedRevision:published.revision});
+      }
+    }catch(error){console.warn('Published project list could not be refreshed; saved projects remain available.');}
+  })();
   const response=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json'}});
   window.fetch=async(input,options={})=>{
     const raw=typeof input==='string'?input:input.url;
