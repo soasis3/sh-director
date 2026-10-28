@@ -109,3 +109,5 @@ body.unified-workspace #timelinePage.timeline-editor{padding:0!important;overflo
 
 /* Place studio modes inside the existing sidebar heading. */
 #higgsfieldPage .unified-sidebar-heading{position:relative}#higgsfieldPage .unified-sidebar-heading .studio-mode-tabs{position:absolute;left:8px;right:8px;bottom:0;transform:none;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}#higgsfieldPage .unified-sidebar-heading .studio-mode-tabs button{flex:1 0 auto;padding:8px 6px;font-size:10px;text-align:center}@media(max-width:720px){#higgsfieldPage .unified-sidebar-heading .studio-mode-tabs{left:8px;right:8px;transform:none}}
+
+#higgsfieldPage .unified-sidebar-heading .studio-mode-tabs button{flex:1 1 0;min-width:0;padding:7px 3px} .studio-mode-tabs svg,.studio-header-icon svg{width:17px;height:17px;display:block;margin:auto}.studio-header-icon{display:inline-flex;color:#b5a2dd;vertical-align:middle;margin-left:10px}#studioContext{display:inline-block}#studioAudioGenerate{width:100%}#studioAudioError{color:#ce9eae}.studio-card .frame audio{width:90%}
