@@ -1,5 +1,5 @@
 // GitHub Pages stores this device's work in IndexedDB until a cloud worker is paired.
-window.SHWeb = !['127.0.0.1','localhost','::1'].includes(location.hostname) || new URLSearchParams(location.search).has('web');
+window.SHWeb = !window.SHNAS && (!['127.0.0.1','localhost','::1'].includes(location.hostname) || new URLSearchParams(location.search).has('web'));
 window.SHMediaURLs = new Map();
 window.SHWebReady = Promise.resolve();
 if (window.SHWeb) {

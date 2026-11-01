@@ -6,7 +6,7 @@ const storyParking=document.createElement('div');storyParking.hidden=true;docume
 document.querySelectorAll('.story > .eyebrow,.story > h2,.story > .hint,.story > .notice').forEach(e=>e.remove());
 document.querySelector('.story').insertAdjacentHTML('afterbegin','<div class="eyebrow">SHOTBOARD</div><h2>씬 목록</h2><p class="hint">씬을 선택하고 컷을 구성하세요.</p>');
 document.querySelector('.board-heading .eyebrow').textContent='03 / SHOTBOARD';
-document.querySelector('.board-footer').innerHTML='글과 이미지로 함께 만드는 샷보드<span>SH / DIRECTOR</span>';
+document.querySelector('.board-footer').innerHTML='글과 이미지로 함께 만드는 샷보드<span>SILO</span>';
 document.querySelector('.brand small').textContent='CREATIVE WORKSPACE';
 let activeTab='story',storySection='overview',assetType='character',assetId=null;
 const assetNames={character:'캐릭터',background:'배경',prop:'프랍'};

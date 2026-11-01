@@ -1,0 +1,11 @@
+.asset-trash-wrap{position:relative;min-width:0}
+.asset-trash-wrap>.asset-card{width:100%;height:100%}
+.card-trash{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;min-width:27px;padding:4px;border:1px solid transparent;border-radius:5px;background:transparent;color:#a4a0aa;cursor:pointer;z-index:5}
+.card-trash:hover,.card-trash:focus-visible{color:#ffc1c1;background:#62383f;border-color:#95535f;outline:none}
+.card-trash svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.asset-trash-wrap>.card-trash{position:absolute;right:8px;top:8px;background:#19191ee6}
+.mood-card{position:relative}
+.mood-card>.card-trash{position:absolute;right:8px;top:8px;background:#19191ee6}
+.cut-top>.card-trash{margin-left:auto}
+.cut-top>.grip+.card-trash{margin-left:4px}
+.cut-top>.grip{margin-left:auto}

@@ -1,6 +1,6 @@
 // Full-page details and compact workspace navigation.
 let workspaceDetail=null,detailProjectId=null;
-const header=document.querySelector('header'),brand=document.querySelector('.brand'),navigation=document.querySelector('.steps');brand.innerHTML='SD';brand.setAttribute('aria-label','SH Director');brand.title='SH Director';header.insertBefore(navigation,document.querySelector('.project'));document.body.classList.add('compact-workspace');
+const header=document.querySelector('header'),brand=document.querySelector('.brand'),navigation=document.querySelector('.steps');brand.innerHTML='<img src="silo-icon.png?v=20261101-silo1" alt="">';brand.setAttribute('aria-label','SILO');brand.title='SILO';header.insertBefore(navigation,document.querySelector('.project'));document.body.classList.add('compact-workspace');
 const queueAnchor=document.createElement('div');queueAnchor.className='queue-anchor';$('#openGenerationQueue').before(queueAnchor);queueAnchor.append($('#openGenerationQueue'));queueAnchor.insertAdjacentHTML('beforeend','<div id="queueTopProgress" role="progressbar" aria-label="생성 진행 상황" hidden><span></span></div><span id="queueDoneBadge" class="queue-done-badge" hidden></span>');
 function detailEntity(kind){return kind==='mood'?moodItems().find(r=>r.id===moodId):kind==='asset'?state.assets.find(a=>a.id===assetId):current()?.cuts.find(c=>c.id===cutId);}
 function setDetail(kind){workspaceDetail=kind;detailProjectId=state.projectId;applyDetailScreen();if(kind==='shot')renderEditor();else renderAssets();window.scrollTo({top:0});}
